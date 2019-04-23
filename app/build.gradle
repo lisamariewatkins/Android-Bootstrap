@@ -66,8 +66,6 @@ dependencies {
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    // retrofit coroutines adapter
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_adapter"
     // retrofit logging
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging"
 
@@ -75,9 +73,18 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
 
     // TODO: Uncomment me for Kotlin Coroutines
+//    // Coroutines
 //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
 //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
 //    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
+//    // retrofit coroutines adapter
+//    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_adapter"
+
+    // TODO: Uncomment me for Rx
+//    // rx
+//    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin"
+//    implementation "io.reactivex.rxjava2:rxjava:$rxJava"
+//    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxAdapter"
 
     // Recycler View
     implementation "com.android.support:recyclerview-v7:$recycler_view"
