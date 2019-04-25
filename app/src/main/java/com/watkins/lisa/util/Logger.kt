@@ -1,6 +1,7 @@
 package com.watkins.lisa.util
 
 import android.util.Log
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
@@ -9,7 +10,7 @@ import javax.inject.Singleton
  * Wrapper around [Log] so we can easily mock this class in unit tests.
  */
 @Singleton
-class Logger {
+class Logger @Inject constructor() {
     fun e(tag: String, message: String) {
         Log.e(tag, message)
     }

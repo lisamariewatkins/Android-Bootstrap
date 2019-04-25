@@ -1,12 +1,10 @@
 package com.watkins.lisa
 
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.watkins.lisa.util.ConnectivityLiveData
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -16,34 +14,22 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
-    lateinit var connectivityManager: ConnectivityManager
+    lateinit var connectivityLiveData: ConnectivityLiveData
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupConnectivityManager()
+        observeNetworkConnectivity()
     }
 
     /**
-     * If we lose network connection, show the user a "hey, there's no network" message for 4 seconds and then hide it.
+     * If we lose network connection, show the user a "hey, there's no network" message for a few seconds and then hide it.
      */
-    private fun setupConnectivityManager() {
-        val connectionStatusBar = findViewById<TextView>(R.id.connection_status)
-        val connectivityLiveData = ConnectivityLiveData(connectivityManager)
-
-        connectivityLiveData.observe(this, Observer { network ->
-            connectionStatusBar.apply {
-                if (network) {
-                    visibility = View.GONE
-                } else {
-                    visibility = View.VISIBLE
-                    postDelayed({
-                        visibility = View.GONE
-                    }, 4000)
-                }
-            }
+    private fun observeNetworkConnectivity() {
+        connectivityLiveData.observe(this, Observer { connected ->
+            if (!connected) Snackbar.make(findViewById(R.id.main_activity), R.string.network_connectivity, Snackbar.LENGTH_LONG).show()
         })
     }
 }

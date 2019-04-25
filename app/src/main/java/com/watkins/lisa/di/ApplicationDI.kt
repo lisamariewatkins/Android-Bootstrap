@@ -6,11 +6,9 @@ import android.net.ConnectivityManager
 import androidx.room.Room
 import com.watkins.lisa.BaseApplication
 import com.watkins.lisa.data.AppDatabase
+import com.watkins.lisa.util.ConnectivityLiveData
 import com.watkins.lisa.util.Logger
-import dagger.BindsInstance
-import dagger.Component
-import dagger.Module
-import dagger.Provides
+import dagger.*
 import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
@@ -48,21 +46,16 @@ interface ApplicationComponent {
 @Module(includes = [
     ViewModelModule::class
 ])
-class ApplicationModule {
+object ApplicationModule {
     @Singleton
     @Provides
+    @JvmStatic
     fun providesContext(application: Application): Context {
         return application
     }
 
-    @Singleton
     @Provides
-    fun providesLogger(): Logger {
-        return Logger()
-    }
-
-    @Singleton
-    @Provides
+    @JvmStatic
     fun providesConnectivityManager(context: Context): ConnectivityManager {
         return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
@@ -70,6 +63,7 @@ class ApplicationModule {
     // TODO: Rename database
     @Singleton
     @Provides
+    @JvmStatic
     fun provideDb(application: Application): AppDatabase {
         return Room
             .databaseBuilder(application, AppDatabase::class.java, "bootstrap.db")

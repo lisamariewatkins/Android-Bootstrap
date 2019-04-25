@@ -5,13 +5,14 @@ import android.net.Network
 import android.net.NetworkInfo
 import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
+import javax.inject.Inject
 
 /**
  * @author Lisa Watkins
  *
  * [LiveData] that listens for network connection via [ConnectivityManager]
  */
-class ConnectivityLiveData constructor(private val connectivityManager: ConnectivityManager)
+class ConnectivityLiveData @Inject constructor(private val connectivityManager: ConnectivityManager)
     : LiveData<Boolean>() {
 
     /**
