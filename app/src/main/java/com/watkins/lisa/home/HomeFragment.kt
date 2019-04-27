@@ -35,8 +35,4 @@ class HomeFragment : Fragment(), Injectable {
 
         return view
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }
