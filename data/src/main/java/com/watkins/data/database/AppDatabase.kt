@@ -1,4 +1,4 @@
-package com.watkins.lisa.data
+package com.watkins.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

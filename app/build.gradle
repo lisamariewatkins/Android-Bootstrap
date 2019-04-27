@@ -35,6 +35,7 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':data')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Dagger
@@ -52,6 +53,9 @@ dependencies {
     // Navigation Component
     implementation "androidx.navigation:navigation-fragment:$nav" // For Kotlin use navigation-fragment-ktx
     implementation "androidx.navigation:navigation-ui:$nav" // For Kotlin use navigation-ui-ktx
+
+    // Work Manager + Coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_manager"
 
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
@@ -72,19 +76,12 @@ dependencies {
     // Moshi
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
 
-    // TODO: Uncomment me for Kotlin Coroutines
-//    // Coroutines
-//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
-//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
-//    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
-//    // retrofit coroutines adapter
-//    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_adapter"
-
-    // TODO: Uncomment me for Rx
-//    // rx
-//    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin"
-//    implementation "io.reactivex.rxjava2:rxjava:$rxJava"
-//    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxAdapter"
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
+    // retrofit coroutines adapter
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_adapter"
 
     // Recycler View
     implementation "com.android.support:recyclerview-v7:$recycler_view"

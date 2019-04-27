@@ -5,9 +5,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import androidx.room.Room
 import com.watkins.lisa.BaseApplication
-import com.watkins.lisa.data.AppDatabase
-import com.watkins.lisa.util.ConnectivityLiveData
-import com.watkins.lisa.util.Logger
+import com.watkins.data.database.AppDatabase
+import com.watkins.data.network.RetrofitFactory
 import dagger.*
 import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
@@ -19,7 +18,8 @@ import javax.inject.Singleton
 @Component(modules = [
     AndroidInjectionModule::class,
     ApplicationModule::class,
-    ActivityModule::class]
+    ActivityModule::class,
+    WorkerBindingModule::class]
 )
 interface ApplicationComponent {
     /**
@@ -58,6 +58,13 @@ object ApplicationModule {
     @JvmStatic
     fun providesConnectivityManager(context: Context): ConnectivityManager {
         return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    }
+
+    @Singleton
+    @JvmStatic
+    @Provides
+    fun providesRetrofitInstance(context: Context): RetrofitFactory {
+        return RetrofitFactory(context)
     }
 
     // TODO: Rename database

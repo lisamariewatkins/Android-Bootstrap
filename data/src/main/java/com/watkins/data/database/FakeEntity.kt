@@ -1,4 +1,4 @@
-package com.watkins.lisa.data
+package com.watkins.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
