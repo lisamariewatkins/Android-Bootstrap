@@ -19,7 +19,7 @@ class ConnectivityLiveData @Inject constructor(private val connectivityManager: 
      * If network connection state changes when the app is backgrounded, sometimes these callbacks are called
      * with a considerable delay. Rather than simply post "true" or "false", check network connection explicitly.
      */
-    private val networkCallback = object : ConnectivityManager.NetworkCallback() {
+    private val networkCallback = object: ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network?) {
             checkNetwork()
         }
@@ -31,16 +31,21 @@ class ConnectivityLiveData @Inject constructor(private val connectivityManager: 
 
     override fun onActive() {
         super.onActive()
-
         checkNetwork()
-
-        // register connectivity callback
-        val builder = NetworkRequest.Builder()
-        connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
+        registerConnectivityCallback()
     }
 
     override fun onInactive() {
         super.onInactive()
+        unregisterConnectivityCallback()
+    }
+
+    private fun registerConnectivityCallback() {
+        val builder = NetworkRequest.Builder()
+        connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
+    }
+
+    private fun unregisterConnectivityCallback() {
         connectivityManager.unregisterNetworkCallback(networkCallback)
     }
 
